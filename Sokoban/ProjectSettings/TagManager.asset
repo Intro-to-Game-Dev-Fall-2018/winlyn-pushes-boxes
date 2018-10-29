@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - bricks
+  - crate
+  - end
+  - end1
+  - end2
+  - crate1
+  - crate2
   layers:
   - Default
   - TransparentFX

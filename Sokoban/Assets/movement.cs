@@ -3,21 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class movement : MonoBehaviour {
-
-    public float speed;
-	
-    // Use this for initialization
+    public float distanceToMove;
+    public float moveSpeed;
+    private bool move;
+    private Vector3 endPosition;
+    
+    
     void Start () {
-		
+        endPosition = transform.position;
     }
-	
-    // Update is called once per frame
-    void FixedUpdate () 
+  
+    void FixedUpdate () {
+        if (move)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, endPosition, moveSpeed * Time.deltaTime);
+        }
+    }
+    void Update()
     {
-        float moveVertical = Input.GetAxis("Vertical");
-        transform.Translate(0, moveVertical * speed * Time.deltaTime, 0);
-
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        transform.Translate(moveHorizontal * speed * Time.deltaTime, 0, 0);
+        if (Input.GetKeyDown(KeyCode.A)) //Left
+        {
+            endPosition = new Vector3(endPosition.x - distanceToMove, endPosition.y);
+            move = true;
+        }
+        if (Input.GetKeyDown(KeyCode.D)) //Right
+        {
+            endPosition = new Vector3(endPosition.x + distanceToMove, endPosition.y);
+            move = true;
+        }
+        if (Input.GetKeyDown(KeyCode.W)) //Up
+        {
+            endPosition = new Vector3(endPosition.x, endPosition.y + distanceToMove);
+            move = true;
+        }
+        if (Input.GetKeyDown(KeyCode.S)) //Down
+        {
+            endPosition = new Vector3(endPosition.x, endPosition.y - distanceToMove);
+            move = true;
+        }
     }
 }
